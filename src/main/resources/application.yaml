@@ -1,6 +1,9 @@
 spring:
   application:
     name: mini-erp
+  datasource:
+    hikari:
+      connection-init-sql: SET TIME ZONE 'UTC'
   flyway:
     clean-disabled: true
     default-schema: mini_erp
