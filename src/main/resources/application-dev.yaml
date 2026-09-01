@@ -1,0 +1,7 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:mini_erp}
+    username: ${POSTGRES_USER:mini_erp}
+    password: ${POSTGRES_PASSWORD}
