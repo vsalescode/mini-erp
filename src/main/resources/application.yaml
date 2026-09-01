@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: mini-erp
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
