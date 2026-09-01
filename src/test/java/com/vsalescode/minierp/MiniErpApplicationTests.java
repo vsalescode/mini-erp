@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 import javax.sql.DataSource;
 
@@ -18,7 +20,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
-@SpringBootTest
+@SpringBootTest(useMainMethod = SpringBootTest.UseMainMethod.ALWAYS)
 @ActiveProfiles("test")
 @Testcontainers
 class MiniErpApplicationTests {
@@ -33,6 +35,8 @@ class MiniErpApplicationTests {
 
 	@Test
 	void startsWithFlywayManagedPostgresInUtc() throws Exception {
+		assertThat(ZoneId.systemDefault().normalized()).isEqualTo(ZoneOffset.UTC);
+
 		try (Connection connection = dataSource.getConnection();
 				Statement statement = connection.createStatement()) {
 			ResultSet flywayHistory = statement.executeQuery("""

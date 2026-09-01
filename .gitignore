@@ -1,5 +1,9 @@
 HELP.md
 target/
+*.log
+logs/
+node_modules/
+dist/
 .env
 .env.*
 !.env.example
@@ -25,7 +29,6 @@ target/
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
-/dist/
 /nbdist/
 /.nb-gradle/
 build/
