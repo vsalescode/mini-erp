@@ -23,34 +23,34 @@ import org.testcontainers.utility.DockerImageName;
 @SpringBootTest(useMainMethod = SpringBootTest.UseMainMethod.ALWAYS)
 @ActiveProfiles("test")
 @Testcontainers
-class MiniErpApplicationTests {
+class MiniErpAplicacaoTestes {
 
 	@Container
 	@ServiceConnection
-	static final PostgreSQLContainer POSTGRES = new PostgreSQLContainer(
+	static final PostgreSQLContainer POSTGRESQL = new PostgreSQLContainer(
 			DockerImageName.parse("postgres:18.6-alpine"));
 
 	@Autowired
-	private DataSource dataSource;
+	private DataSource fonteDeDados;
 
 	@Test
-	void startsWithFlywayManagedPostgresInUtc() throws Exception {
+	void iniciaComPostgresqlGerenciadoPeloFlywayEmUtc() throws Exception {
 		assertThat(ZoneId.systemDefault().normalized()).isEqualTo(ZoneOffset.UTC);
 
-		try (Connection connection = dataSource.getConnection();
-				Statement statement = connection.createStatement()) {
-			ResultSet flywayHistory = statement.executeQuery("""
+		try (Connection conexao = fonteDeDados.getConnection();
+				Statement comando = conexao.createStatement()) {
+			ResultSet historicoFlyway = comando.executeQuery("""
 					select count(*)
 					from information_schema.tables
 					where table_schema = 'mini_erp'
 					  and table_name = 'flyway_schema_history'
 					""");
-			assertThat(flywayHistory.next()).isTrue();
-			assertThat(flywayHistory.getInt(1)).isEqualTo(1);
+			assertThat(historicoFlyway.next()).isTrue();
+			assertThat(historicoFlyway.getInt(1)).isEqualTo(1);
 
-			ResultSet timezone = statement.executeQuery("show timezone");
-			assertThat(timezone.next()).isTrue();
-			assertThat(timezone.getString(1)).isEqualTo("UTC");
+			ResultSet fusoHorario = comando.executeQuery("show timezone");
+			assertThat(fusoHorario.next()).isTrue();
+			assertThat(fusoHorario.getString(1)).isEqualTo("UTC");
 		}
 	}
 
