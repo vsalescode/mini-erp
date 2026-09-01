@@ -7,11 +7,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MiniErpApplication {
+public class MiniErpAplicacao {
 
-	public static void main(String[] args) {
+	public static void main(String[] argumentos) {
 		TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
-		SpringApplication.run(MiniErpApplication.class, args);
+		SpringApplication.run(MiniErpAplicacao.class, argumentos);
 	}
 
 }
