@@ -11,4 +11,6 @@ public interface RepositorioCategorias {
 
 	Optional<Categoria> buscarPorIdentificador(IdentificadorCategoria identificador);
 
+	ResultadoPesquisaCategorias pesquisar(CriteriosPesquisaCategorias criterios);
+
 }

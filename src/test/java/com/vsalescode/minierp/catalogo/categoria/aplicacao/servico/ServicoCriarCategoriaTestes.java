@@ -17,8 +17,10 @@ import com.vsalescode.minierp.catalogo.categoria.aplicacao.ExcecaoChaveIdempoten
 import com.vsalescode.minierp.catalogo.categoria.aplicacao.porta.entrada.ComandoCriarCategoria;
 import com.vsalescode.minierp.catalogo.categoria.aplicacao.porta.entrada.DadosCategoria;
 import com.vsalescode.minierp.catalogo.categoria.aplicacao.porta.saida.ControleIdempotenciaCriacaoCategoria;
+import com.vsalescode.minierp.catalogo.categoria.aplicacao.porta.saida.CriteriosPesquisaCategorias;
 import com.vsalescode.minierp.catalogo.categoria.aplicacao.porta.saida.Relogio;
 import com.vsalescode.minierp.catalogo.categoria.aplicacao.porta.saida.RepositorioCategorias;
+import com.vsalescode.minierp.catalogo.categoria.aplicacao.porta.saida.ResultadoPesquisaCategorias;
 import com.vsalescode.minierp.catalogo.categoria.dominio.Categoria;
 import com.vsalescode.minierp.catalogo.categoria.dominio.IdentificadorCategoria;
 
@@ -93,6 +95,11 @@ class ServicoCriarCategoriaTestes {
 		@Override
 		public Optional<Categoria> buscarPorIdentificador(IdentificadorCategoria identificador) {
 			return Optional.ofNullable(categorias.get(identificador));
+		}
+
+		@Override
+		public ResultadoPesquisaCategorias pesquisar(CriteriosPesquisaCategorias criterios) {
+			throw new UnsupportedOperationException("Este teste não pesquisa categorias");
 		}
 
 	}
